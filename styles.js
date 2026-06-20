@@ -16,18 +16,16 @@ if (navToggle) {
 
 // Portfolio filter
 const filterBtns = document.querySelectorAll('.filter-btn');
-const reels = document.querySelectorAll('.reel');
+const workCards = document.querySelectorAll('.work-card');
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     filterBtns.forEach(b => b.classList.remove('is-active'));
     btn.classList.add('is-active');
     const filter = btn.dataset.filter;
-    reels.forEach(reel => {
-      const match = filter === 'all' || reel.dataset.cat === filter;
-      reel.classList.toggle('is-hidden', !match);
+    workCards.forEach(card => {
+      const match = filter === 'all' || card.dataset.cat === filter;
+      card.classList.toggle('is-hidden', !match);
     });
-    // Recalculate immediately so hidden/shown reels don't leave stale scale values
-    updateReelProgress();
   });
 });
 
@@ -35,43 +33,42 @@ filterBtns.forEach(btn => {
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// Scroll-driven zoom: each reel's screenshot scales up continuously as you
-// scroll through its track, reaching max zoom right as the next reel begins.
-// Skipped for reduced-motion users (they get a static mid-zoom frame instead).
+// Immersive scroll effect: the project nearest center of viewport grows,
+// others dim slightly. Skipped entirely for reduced-motion preference.
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function updateReelProgress() {
-  const viewportHeight = window.innerHeight;
-  reels.forEach((reel) => {
-    if (reel.classList.contains('is-hidden')) return;
-    const frame = reel.querySelector('.reel-frame');
-    if (!frame) return;
-
-    const rect = reel.getBoundingClientRect();
-    const scrollable = rect.height - viewportHeight;
-    let progress = scrollable > 0 ? (-rect.top) / scrollable : 0;
-    progress = Math.max(0, Math.min(1, progress));
-
-    frame.style.setProperty('--p', progress.toFixed(3));
-  });
-}
-
-if (!prefersReducedMotion && reels.length) {
-  let ticking = false;
-  const onScroll = () => {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(() => {
-        updateReelProgress();
-        ticking = false;
+if (!prefersReducedMotion && workCards.length) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const card = entry.target;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          card.classList.add('is-active');
+          card.classList.remove('is-dimmed');
+        } else {
+          card.classList.remove('is-active');
+        }
       });
-    }
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  updateReelProgress();
-}
 
+      // Dim any visible-but-not-active cards so the active one reads as focused
+      workCards.forEach((card) => {
+        if (!card.classList.contains('is-active') && !card.classList.contains('is-hidden')) {
+          const rect = card.getBoundingClientRect();
+          const inView = rect.bottom > 0 && rect.top < window.innerHeight;
+          card.classList.toggle('is-dimmed', inView);
+        } else if (card.classList.contains('is-active')) {
+          card.classList.remove('is-dimmed');
+        }
+      });
+    },
+    {
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+      rootMargin: '-10% 0px -10% 0px',
+    }
+  );
+
+  workCards.forEach((card) => observer.observe(card));
+}
 
 // Contact form submission via Cloudflare Pages Function
 const form = document.getElementById('contact-form');
