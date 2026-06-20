@@ -1,7 +1,7 @@
 /* ====== Tokens ====== */
 :root{
-  --navy:#3A3C40;
-  --navy-2:#33353A;
+  --navy:#4D5057;
+  --navy-2:#45474E;
   --parchment:#F5F2EA;
   --gold:#2F9BDE;
   --gold-soft:#E2453B;
@@ -59,7 +59,7 @@ main, header, footer{position:relative; z-index:2;}
 .site-header{
   position:sticky; top:0; z-index:50;
   backdrop-filter:blur(10px);
-  background:rgba(58,60,64,0.78);
+  background:rgba(77,80,87,0.78);
   border-bottom:1px solid var(--line);
 }
 .header-inner{
@@ -177,7 +177,8 @@ main, header, footer{position:relative; z-index:2;}
 .filter-btn.is-active{ background:var(--gold); color:var(--navy); border-color:var(--gold); }
 
 .work-grid{
-  display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;
+  display:grid; grid-template-columns:1fr; gap:64px;
+  max-width:880px; margin:0 auto;
 }
 .work-card{
   background:var(--navy-2);
@@ -185,15 +186,34 @@ main, header, footer{position:relative; z-index:2;}
   border-radius:var(--radius);
   overflow:hidden;
   position:relative;
-  transition:border-color .2s, transform .2s;
+  transition:border-color .4s, opacity .5s ease;
 }
-.work-card:hover{ border-color:rgba(47,155,222,0.45); transform:translateY(-3px); }
+.work-card:hover{ border-color:rgba(47,155,222,0.45); }
 .work-card.is-hidden{ display:none; }
+.work-card.is-active{
+  border-color:rgba(47,155,222,0.4);
+}
+.work-card.is-dimmed{
+  opacity:0.55;
+}
 
 .work-thumb{
-  height:200px; position:relative;
+  height:220px; position:relative;
   display:flex; align-items:center; justify-content:center;
   border-bottom:1px solid var(--line);
+  overflow:hidden;
+  transition:height .65s cubic-bezier(.22,1,.36,1);
+}
+.work-card.is-active .work-thumb{
+  height:min(62vh, 620px);
+}
+.work-thumb img{
+  width:100%; height:100%; object-fit:cover;
+  transform:scale(1.04);
+  transition:transform .65s cubic-bezier(.22,1,.36,1);
+}
+.work-card.is-active .work-thumb img{
+  transform:scale(1);
 }
 .ph-1{ background:linear-gradient(135deg, #1c2b45, #2E4057); }
 .ph-2{ background:linear-gradient(135deg, #20342f, #5C8374); }
@@ -203,7 +223,7 @@ main, header, footer{position:relative; z-index:2;}
 
 .work-stamp{
   position:absolute; top:16px; right:16px;
-  background:rgba(58,60,64,0.9);
+  background:rgba(77,80,87,0.9);
   border:1px solid var(--gold);
   color:var(--gold-soft);
   padding:5px 11px; border-radius:999px;
