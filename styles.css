@@ -1,15 +1,15 @@
 /* ====== Tokens ====== */
 :root{
-  --navy:#E9E8E3;
-  --navy-2:#DEDDD5;
+  --navy:#3A3C40;
+  --navy-2:#33353A;
   --parchment:#F5F2EA;
-  --gold:#B9802A;
-  --gold-soft:#946218;
+  --gold:#D9A23B;
+  --gold-soft:#E9C375;
   --slate:#2E4057;
-  --sage:#3E6B5B;
-  --ink:#1C1F26;
-  --ink-dim:#5B5E68;
-  --line:rgba(28,31,38,0.12);
+  --sage:#7FA897;
+  --ink:#EDEAE0;
+  --ink-dim:#AFB1B6;
+  --line:rgba(237,234,224,0.12);
 
   --font-display:"Fraunces", serif;
   --font-body:"Inter", system-ui, sans-serif;
@@ -59,7 +59,7 @@ main, header, footer{position:relative; z-index:2;}
 .site-header{
   position:sticky; top:0; z-index:50;
   backdrop-filter:blur(10px);
-  background:rgba(233,232,227,0.78);
+  background:rgba(58,60,64,0.78);
   border-bottom:1px solid var(--line);
 }
 .header-inner{
@@ -200,7 +200,7 @@ main, header, footer{position:relative; z-index:2;}
 
 .work-stamp{
   position:absolute; top:16px; right:16px;
-  background:rgba(233,232,227,0.9);
+  background:rgba(58,60,64,0.9);
   border:1px solid var(--gold);
   color:var(--gold-soft);
   padding:5px 11px; border-radius:999px;
