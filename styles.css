@@ -229,6 +229,11 @@ main, header, footer{position:relative; z-index:2;}
   background-size:100% 320%;
   background-position:center calc(var(--sp, 0) * 100%);
 }
+.reel-img.has-shot{
+  background-size:100% auto;
+  background-position:center top;
+  background-position-y:calc(var(--sp, 0) * 100%);
+}
 .reel-img img{ width:100%; height:100%; object-fit:cover; }
 .reel-img.ph-1{ background-image:linear-gradient(180deg, #1c2b45 0%, #243a5c 25%, #2E4057 50%, #20303f 75%, #16222f 100%); }
 .reel-img.ph-2{ background-image:linear-gradient(180deg, #20342f 0%, #2c4a3e 25%, #5C8374 50%, #3a5c4f 75%, #243b32 100%); }
