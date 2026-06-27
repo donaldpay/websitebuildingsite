@@ -12,7 +12,7 @@
   --line:rgba(27,31,39,0.14);
   --btn-text:#0E1014;
 
-  --font-display:"Lora", serif;
+  --font-display:"Fraunces", serif;
   --font-body:"Inter", system-ui, sans-serif;
   --font-mono:"JetBrains Mono", monospace;
 
@@ -222,8 +222,8 @@ main, header, footer{position:relative; z-index:2;}
   position:absolute;
   top:50%;
   left:50%;
-  width:calc(340px + var(--p, 0.5) * (92vw - 340px));
-  height:calc(520px + var(--p, 0.5) * (90vh - 520px));
+  width:calc(340px + var(--p, 0.5) * (max(92vw, 380px) - 340px));
+  height:calc(520px + var(--p, 0.5) * (max(90vh, 640px) - 520px));
   max-width:97vw;
   max-height:94vh;
   border-radius:18px;
@@ -243,8 +243,8 @@ main, header, footer{position:relative; z-index:2;}
 
 .reel-frame{
   position:relative;
-  width:calc(340px + var(--p, 0.5) * (92vw - 340px));
-  height:calc(520px + var(--p, 0.5) * (90vh - 520px));
+  width:calc(340px + var(--p, 0.5) * (max(92vw, 380px) - 340px));
+  height:calc(520px + var(--p, 0.5) * (max(90vh, 640px) - 520px));
   max-width:97vw;
   max-height:94vh;
   border-radius:18px;
@@ -425,4 +425,14 @@ main, header, footer{position:relative; z-index:2;}
   .work-grid{ grid-template-columns:1fr; }
   .services-grid{ grid-template-columns:1fr; }
   .process-list li{ grid-template-columns:50px 1fr; }
+  .reel-panel.panel-blue{
+    transform:translate(calc(-50% - 14px), calc(-50% - 14px));
+  }
+  .reel-panel.panel-red{
+    transform:translate(calc(-50% + 14px), calc(-50% + 14px));
+  }
+  .reel-overlay{
+    width:90vw;
+    padding:16px 18px 18px;
+  }
 }
